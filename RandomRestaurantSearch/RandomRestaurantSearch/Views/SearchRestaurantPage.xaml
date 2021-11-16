@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:RandomRestaurantSearch.ViewModels"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:effects="clr-namespace:RandomRestaurantSearch.Effects"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             x:Class="RandomRestaurantSearch.Views.SearchRestaurantPage">
+
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Label Text="ジャンルを選んでください"
+                   TextColor="OrangeRed"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   Margin="0, 20, 0, 10"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker SelectedItem="{Binding RestaurantGenre1, Mode=TwoWay}"
+                        ItemsSource="{Binding Genres}"
+                        Margin="8, 5"
+                        HorizontalOptions="FillAndExpand">
+                        <Picker.Effects>
+                            <effects:SelectedEffect/>
+                        </Picker.Effects>
+                </Picker>
+                <Picker SelectedItem="{Binding RestaurantGenre2, Mode=TwoWay}"
+                        ItemsSource="{Binding Genres}"
+                        Margin="8, 5"
+                        HorizontalOptions="FillAndExpand">
+                        <Picker.Effects>
+                            <effects:SelectedEffect/>
+                        </Picker.Effects>
+                </Picker>
+                <Picker SelectedItem="{Binding RestaurantGenre3, Mode=TwoWay}"
+                        ItemsSource="{Binding Genres}"
+                        Margin="8, 5"
+                        HorizontalOptions="FillAndExpand">
+                        <Picker.Effects>
+                            <effects:SelectedEffect/>
+                        </Picker.Effects>
+                </Picker>
+            </StackLayout>
+            <Button Text="検索"
+                    x:Name="SearchButton"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="DarkSlateGray"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    CornerRadius="20"
+                    HeightRequest="50"
+                    Margin="10"
+                    WidthRequest="150"
+                    IsEnabled="False"
+                    Command="{Binding SearchCommand}" />
+            <ListView x:Name="ShopListView"
+                      ItemsSource="{Binding SearchResults}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemSelected"
+                                                     Command="{Binding ShopDetailCommand}"
+                                                     CommandParameter="{x:Reference ShopListView}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding logo_image}"
+                                   Text="{Binding name}"
+                                   Detail="{Binding address}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

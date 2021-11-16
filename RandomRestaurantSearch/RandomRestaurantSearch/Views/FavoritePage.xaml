@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="RandomRestaurantSearch.Views.FavoritePage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <Label Text="お気に入り一覧"
+                   TextColor="OrangeRed"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0, 20, 0, 10"/>
+            <ListView x:Name="FavoriteShopsListView"
+                      ItemsSource="{Binding FavoriteShops}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemSelected"
+                                                         Command="{Binding ShopDetailCommand}"
+                                                         CommandParameter="{x:Reference FavoriteShopsListView}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell ImageSource="{Binding logo_image}"
+                                       Text="{Binding name}"
+                                       Detail="{Binding address}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Button Text="更新"
+                        Command="{Binding FavoriteUpdateCommand}"
+                        FontAttributes="Bold"
+                        TextColor="Blue"
+                        FontSize="18"
+                        CornerRadius="20"/>
+                <Button Text="削除"
+                        Command="{Binding FavoriteDeleteCommand}"
+                        FontAttributes="Bold"
+                        TextColor="Red"
+                        FontSize="18"
+                        CornerRadius="20"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

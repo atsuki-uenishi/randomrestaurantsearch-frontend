@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RandomRestaurantSearch.Views.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout Margin="20"
+                 VerticalOptions="Center">
+            <Entry x:Name="emailEntry" 
+                       Placeholder="Email"
+                       Text="{Binding Email, Mode=TwoWay}"
+                       Keyboard="Email"/>
+            <Entry x:Name="passwordEntry" 
+                       Placeholder="Password"
+                       Text="{Binding Password, Mode=TwoWay}"
+                       IsPassword="True"/>
+            <Button x:Name="registerButton"
+                        Text="Register"
+                        Command="{Binding RegisterCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

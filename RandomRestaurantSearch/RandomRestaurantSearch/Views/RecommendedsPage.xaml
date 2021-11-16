@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             x:Class="RandomRestaurantSearch.Views.RecommendedsPage">
+
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="おすすめの一品"
+                   TextColor="OrangeRed"
+                   HorizontalOptions="Center"
+                   FontAttributes="Bold"
+                   Margin="0, 20, 0, 10"
+                   FontSize="18"/>
+            <Button Text="おすすめの一品を投稿"
+                     Command="{Binding GoTpPost}"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="DarkSlateGray"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    CornerRadius="20"
+                    Margin="10"
+                    WidthRequest="150"/>
+            <Button Text="検　　索"
+                    Command="{Binding SearchArea}"
+                    BackgroundColor="LightSkyBlue"
+                    TextColor="DarkSlateGray"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    CornerRadius="20"
+                    Margin="10"
+                    WidthRequest="150"/>
+            <ListView x:Name="RecommendedShopListView"
+                      ItemsSource="{Binding RecommendedShops}">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemSelected"
+                                                         Command="{Binding PostDetailCommand}"
+                                                         CommandParameter="{x:Reference RecommendedShopListView}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Resources="{Binding name}"/>
+                                <Image Source="{Binding image}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
